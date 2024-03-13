@@ -213,7 +213,7 @@ DECLARE
     v_vechime NUMBER(4,2);
     v_min NUMBER;
     v_max NUMBER;
-    v_counter NUMBER := 1; -- Setăm v_counter la 1 pentru a începe de la primul angajat
+    v_counter NUMBER := 1; 
 BEGIN
     SELECT MIN(id_angajat), MAX(id_angajat) INTO v_min, v_max
     FROM angajati;
@@ -249,7 +249,7 @@ DECLARE
     v_vechime NUMBER(4,2);
     v_min NUMBER;
     v_max NUMBER;
-    v_counter NUMBER := 1; -- Setăm v_counter la 1 pentru a începe de la primul angajat
+    v_counter NUMBER := 1; 
 BEGIN
     SELECT MIN(id_angajat), MAX(id_angajat) INTO v_min, v_max
     FROM angajati;
@@ -270,7 +270,7 @@ BEGIN
             DBMS_output.put_line(v_counter || ' nu exista');
         END IF;
         
-        EXIT WHEN v_counter = v_max; -- Ieșim din buclă când am parcurs toți angajații
+        EXIT WHEN v_counter = v_max; 
         
         v_counter := v_counter + 1;
     END LOOP;
