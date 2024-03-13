@@ -1,11 +1,11 @@
---1. Într-un bloc PL/SQL s? se modifice salariul angajatului citit de la tastatur? în func?ie de num?rul de comenzi pe care acesta le-a intermediat. Urma?i pa?ii:
--- ini?ial, se vor afi?a numele ?i salariul angajatului citit de la tastatur?
--- se va calcula ?i se va afi?a num?rul de comenzi intermediate de angajatul respectiv
--- în cazul în care acesta este între 3 ?i 7, salariul angajatului va cre?te cu 10%
+--1. Într-un bloc PL/SQL sa se modifice salariul angajatului citit de la tastatura în functie de numarul de comenzi pe care acesta le-a intermediat. Urmariti pasii:
+-- initial, se vor afisa numele si salariul angajatului citit de la tastatura
+-- se va calcula si se va afisa numarul de comenzi intermediate de angajatul respectiv
+-- în cazul în care acesta este între 3 si 7, salariul angajatului va creste cu 10%
 -- în cazul în care acesta este mai mare decât 7, salariul angajatului va cre?te cu 20%
--- altfel, salariul angajatului r?mâne nemodificat
+-- altfel, salariul angajatului ramâne nemodificat
 -- se va opera modificarea salariului la nivelul tabelei
--- la final, se va afi?a salariul nou al angajatului respectiv
+-- la final, se va afisa salariul nou al angajatului respectiv
 
 SET SERVEROUTPUT ON;
 
@@ -44,7 +44,7 @@ BEGIN
 END;
 /
 
--- 2. Într-un bloc PL/SQL s? se parcurg? to?i angaja?ii cu id_angajat de la 100 la 120, afi?ând numele, salariul ?i vechimea.
+-- 2. Într-un bloc PL/SQL sa se parcurga toti angajatii cu id_angajat de la 100 la 120, afisând numele, salariul si vechimea.
 SET SERVEROUTPUT ON;
 
 DECLARE
@@ -65,9 +65,9 @@ END;
 /
 
 
--- 3. Într-un bloc PL/SQL s? se parcurg? to?i angaja?ii, folosind pe rând structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
+-- 3. Într-un bloc PL/SQL sa se parcurga toti angajatii, folosind pe rând structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
 
---FOR-LOOP
+-- FOR-LOOP
 
 SET SERVEROUTPUT ON;
 
@@ -88,7 +88,7 @@ BEGIN
 END;
 /
 
---LOOP-EXIT
+-- LOOP-EXIT WHEN
 
 SET SERVEROUTPUT ON;
 
@@ -114,7 +114,7 @@ END;
 /
 
 
---WHILE-LOOP
+-- WHILE-LOOP
 
 SET SERVEROUTPUT ON;
 
@@ -164,13 +164,14 @@ BEGIN
 END;
 /
 
--- 4. Printr-o comand? SQL simpl?, s? se ?tearg? angajatul cu id_angajat 150
+-- 4. Printr-o comanda SQL simpla, sa se stearga angajatul cu id_angajat 150
 DELETE FROM angajati WHERE id_angajat = 150;
 
 
 -- 5. Într-un bloc PL/SQL s? se parcurg? to?i angaja?ii, folosind pe rând structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
 
 -- FOR-LOOP
+
 SET SERVEROUTPUT ON;
 
 DECLARE
@@ -204,6 +205,7 @@ END;
 /
 
 -- WHILE-LOOP
+    
 SET SERVEROUTPUT ON;
 
 DECLARE
@@ -240,6 +242,7 @@ END;
 /
 
 -- LOOP-EXIT WHEN
+    
 SET SERVEROUTPUT ON;
 
 DECLARE
