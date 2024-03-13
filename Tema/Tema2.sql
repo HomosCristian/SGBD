@@ -1,9 +1,9 @@
---1. �ntr-un bloc PL/SQL s? se modifice salariul angajatului citit de la tastatur? �n func?ie de num?rul de comenzi pe care acesta le-a intermediat. Urma?i pa?ii:
+--1. Într-un bloc PL/SQL s? se modifice salariul angajatului citit de la tastatur? în func?ie de num?rul de comenzi pe care acesta le-a intermediat. Urma?i pa?ii:
 -- ini?ial, se vor afi?a numele ?i salariul angajatului citit de la tastatur?
 -- se va calcula ?i se va afi?a num?rul de comenzi intermediate de angajatul respectiv
--- �n cazul �n care acesta este �ntre 3 ?i 7, salariul angajatului va cre?te cu 10%
--- �n cazul �n care acesta este mai mare dec�t 7, salariul angajatului va cre?te cu 20%
--- altfel, salariul angajatului r?m�ne nemodificat
+-- în cazul în care acesta este între 3 ?i 7, salariul angajatului va cre?te cu 10%
+-- în cazul în care acesta este mai mare decât 7, salariul angajatului va cre?te cu 20%
+-- altfel, salariul angajatului r?mâne nemodificat
 -- se va opera modificarea salariului la nivelul tabelei
 -- la final, se va afi?a salariul nou al angajatului respectiv
 
@@ -44,7 +44,7 @@ BEGIN
 END;
 /
 
--- 2. �ntr-un bloc PL/SQL s? se parcurg? to?i angaja?ii cu id_angajat de la 100 la 120, afi?�nd numele, salariul ?i vechimea.
+-- 2. Într-un bloc PL/SQL s? se parcurg? to?i angaja?ii cu id_angajat de la 100 la 120, afi?ând numele, salariul ?i vechimea.
 SET SERVEROUTPUT ON;
 
 DECLARE
@@ -65,7 +65,7 @@ END;
 /
 
 
--- 3. �ntr-un bloc PL/SQL s? se parcurg? to?i angaja?ii, folosind pe r�nd structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
+-- 3. Într-un bloc PL/SQL s? se parcurg? to?i angaja?ii, folosind pe rând structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
 
 --FOR-LOOP
 
@@ -168,9 +168,9 @@ END;
 DELETE FROM angajati WHERE id_angajat = 150;
 
 
--- 5. �ntr-un bloc PL/SQL s? se parcurg? to?i angaja?ii, folosind pe r�nd structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
+-- 5. Într-un bloc PL/SQL s? se parcurg? to?i angaja?ii, folosind pe rând structurile: FOR-LOOP, WHILE-LOOP, LOOP-EXIT WHEN
 
-
+-- FOR-LOOP
 SET SERVEROUTPUT ON;
 
 DECLARE
@@ -199,6 +199,80 @@ BEGIN
         ELSE 
             DBMS_output.put_line(i || ' nu exista');
         END IF;
+    END LOOP;
+END;
+/
+
+-- WHILE-LOOP
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_id_angajat angajati.id_angajat%TYPE;
+    v_nume angajati.nume%TYPE;
+    v_salariu angajati.salariul%TYPE;
+    v_vechime NUMBER(4,2);
+    v_min NUMBER;
+    v_max NUMBER;
+    v_counter NUMBER := 1; -- Setăm v_counter la 1 pentru a începe de la primul angajat
+BEGIN
+    SELECT MIN(id_angajat), MAX(id_angajat) INTO v_min, v_max
+    FROM angajati;
+    
+    WHILE v_counter <= v_max LOOP
+        SELECT COUNT(id_angajat) INTO v_id_angajat
+        FROM angajati
+        WHERE id_angajat = v_counter;
+        
+        IF v_id_angajat = 1 THEN 
+            SELECT salariul, nume, (SYSDATE - data_angajare) / 365 
+            INTO v_salariu, v_nume, v_vechime
+            FROM angajati
+            WHERE id_angajat = v_counter;
+                
+            DBMS_output.put_line(v_counter || '-' || v_nume || ' are salariul ' || v_salariu || ' si vechimea ' || v_vechime);
+        ELSE 
+            DBMS_output.put_line(v_counter || ' nu exista');
+        END IF;
+        
+        v_counter := v_counter + 1;
+    END LOOP;
+END;
+/
+
+-- LOOP-EXIT WHEN
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_id_angajat angajati.id_angajat%TYPE;
+    v_nume angajati.nume%TYPE;
+    v_salariu angajati.salariul%TYPE;
+    v_vechime NUMBER(4,2);
+    v_min NUMBER;
+    v_max NUMBER;
+    v_counter NUMBER := 1; -- Setăm v_counter la 1 pentru a începe de la primul angajat
+BEGIN
+    SELECT MIN(id_angajat), MAX(id_angajat) INTO v_min, v_max
+    FROM angajati;
+    
+    LOOP
+        SELECT COUNT(id_angajat) INTO v_id_angajat
+        FROM angajati
+        WHERE id_angajat = v_counter;
+        
+        IF v_id_angajat = 1 THEN 
+            SELECT salariul, nume, (SYSDATE - data_angajare) / 365 
+            INTO v_salariu, v_nume, v_vechime
+            FROM angajati
+            WHERE id_angajat = v_counter;
+                
+            DBMS_output.put_line(v_counter || '-' || v_nume || ' are salariul ' || v_salariu || ' si vechimea ' || v_vechime);
+        ELSE 
+            DBMS_output.put_line(v_counter || ' nu exista');
+        END IF;
+        
+        EXIT WHEN v_counter = v_max; -- Ieșim din buclă când am parcurs toți angajații
+        
+        v_counter := v_counter + 1;
     END LOOP;
 END;
 /
