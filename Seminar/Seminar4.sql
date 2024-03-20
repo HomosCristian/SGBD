@@ -89,21 +89,21 @@ END;
 --4. Construiti un bloc PL/SQL prin care sa se afiseze, pentru fiecare departament, valoarea totala a salariilor platite angajatilor.(curosr explicit)
 
 SET SERVEROUTPUT ON;
+
 DECLARE
- CURSOR c IS SELECT id_comanda, data, COUNT(id_produs) nr_produse
- FROM comenzi JOIN rand_comenzi USING (id_comanda)
- GROUP BY id_comanda, data
- ORDER BY COUNT(id_produs) DESC
- FETCH FIRST 3 ROWS ONLY;
- v c%ROWTYPE;
+    --declarare cursor explicit
+    CURSOR c IS SELECT SUM(salariul) total, id_departament,denumire_departament
+                FROM angajati JOIN departamente USING (id_departament)
+                GROUP BY id_departament,denumire_departament;
 BEGIN
- FOR v IN c
- LOOP
- DBMS_OUTPUT.PUT_LINE('ID comanda: ' || v.id_comanda || ' cu nr de produse: ' ||
-v.nr_produse);
- END LOOP;
+    FOR v IN c
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('total salarii: ' || v.total || ' id departament: ' || v.id_departament);
+    END LOOP;
 
 END;
+/
+
 
 
 --5. Construiti un bloc PL/SQL prin care sa se afiseze informatii despre angajati, precum ?i numarul de comenzi intermediate de fiecare.(cursor explicit)
